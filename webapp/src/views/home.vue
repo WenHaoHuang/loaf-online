@@ -167,7 +167,7 @@ export default defineComponent({
       websock.on('sendMsg', data => {
         const { id, userId } = data
         if (!msgList.value.some(v => v.id === id)) {
-          const { userName = '' } = userList.value.find(v => v.userId = userId) || {}
+          const { userName = '' } = userList.value.find(v => v.userId === userId) || {}
           data.userName = userName
           // 对数据进行解密
           data.msg = Decrypt(data.msg)

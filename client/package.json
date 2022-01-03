@@ -6,21 +6,47 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "dist": "electron-builder --win --x64",
+    "build": "electron-packager ./ loaf-online --platform=win32 --out ./out --electron-version 16.0.5 --overwrite --icon=./logo.png"
   },
-  "keywords": ["loaf"],
+  "keywords": [
+    "loaf"
+  ],
   "author": "loaf",
   "license": "ISC",
   "devDependencies": {
-    "@electron-forge/maker-deb": "^6.0.0-beta.61",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
-    "@electron-forge/maker-zip": "^6.0.0-beta.61",
-    "electron": "^16.0.5"
+    "@electron-forge/maker-deb": "6.0.0-beta.61",
+    "@electron-forge/maker-rpm": "6.0.0-beta.61",
+    "@electron-forge/maker-squirrel": "6.0.0-beta.61",
+    "@electron-forge/maker-zip": "6.0.0-beta.61",
+    "electron": "16.0.5",
+    "electron-builder": "22.14.5",
+    "electron-packager": "15.4.0",
+    "electron-squirrel-startup": "1.0.0"
   },
   "dependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.61",
-    "electron-squirrel-startup": "^1.0.0"
+    "@electron-forge/cli": "6.0.0-beta.61"
+  },
+  "build": {
+    "appId": "com.loaf.app",
+    "productName": "loaf-online",
+    "directories": {
+      "output": "build"
+    },
+    "mac": {
+      "target": ["dmg", "zip"]
+    },
+    "win": {
+      "target": ["nsis", "zip"]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true, 
+      "createStartMenuShortcut": true
+    }
   },
   "config": {
     "forge": {
