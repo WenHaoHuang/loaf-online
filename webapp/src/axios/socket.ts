@@ -1,8 +1,13 @@
-import io from 'socket.io-client'
+import { io } from 'socket.io-client'
 
 import type { App } from 'vue'
 
-export const websock = io("ws://127.0.0.1:3000", { forceNew: true });
+const serverAddress = 'http://localhost:3000'
+
+export const websock = io(serverAddress, {
+  forceNew: true,
+  reconnection: false,
+});
 
 const SOCKET = {
   install: (app: App) => {

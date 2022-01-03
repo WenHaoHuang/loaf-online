@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
 dist/
-client/out/
+/client/out/
+/client/resources/
 
 # lock
 yarn.lock

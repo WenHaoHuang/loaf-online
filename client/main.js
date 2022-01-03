@@ -1,9 +1,8 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, Tray} = require('electron')
+const { app, BrowserWindow } = require('electron')
 const path = require('path')
 
-function createWindow () {
-  const appIcon = new Tray(path.join(__dirname, 'logo.png'))
+function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 890,
@@ -11,13 +10,13 @@ function createWindow () {
     // frame: false,
     autoHideMenuBar: true,
     icon: path.join(__dirname, 'logo.png'),
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    }
+    // webPreferences: {
+    //   preload: path.join(__dirname, 'preload.js')
+    // }
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('./dist/index.html')
+  mainWindow.loadFile('./resources/index.html')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()

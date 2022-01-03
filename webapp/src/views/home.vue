@@ -172,7 +172,6 @@ export default defineComponent({
           // 对数据进行解密
           data.msg = Decrypt(data.msg)
           data.createTime = format(data.createTime)
-          console.log('数据解密', data.id, data.msg)
           msgList.value.push(data);
         }
       });
