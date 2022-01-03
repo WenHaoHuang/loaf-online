@@ -1,0 +1,29 @@
+$login-width: 260px;
+
+.box-login {
+  width: $login-width;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &--header {
+    height: 180px;
+    background: transparent url('../assets/logo_login.png') scroll center center no-repeat;
+    background-size: 100% 100%;
+  }
+
+  &--copyright {
+    text-align: center;
+  }
+
+  .el-button,
+  .el-select {
+    width: 100%;
+  }
+}

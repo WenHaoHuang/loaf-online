@@ -1,0 +1,46 @@
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+html * {
+  box-sizing: border-box;
+}
+
+#app {
+  overflow: hidden;
+}
+
+.wrapper-app {
+  height: 100%;
+  overflow: hidden;
+}
+
+// 遮罩
+.dialog-overlay {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  .dialog-main {
+    width: 300px;
+    padding: 20px;
+    border-radius: 4px;
+    background-color: #fff;
+    .form-item + .form-item {
+      margin-top: 16px;
+      text-align: center;
+    }
+  }
+}

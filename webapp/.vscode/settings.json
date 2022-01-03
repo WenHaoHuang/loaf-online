@@ -1,0 +1,33 @@
+/**
+ * @Author: wenhao.huang
+ * @Create: 2019-01-26 11:07:15
+ * @Description: 项目代码格式化设置
+ * *******************************************************
+ * 扩展列表 - 必装
+ * Vetur, ESLint, Todo+, Prettier - Code formatter
+ * *******************************************************
+ * 扩展列表 - 推荐
+ * Auto Close Tag, Auto Rename Tag, Bracket Pair Colorizer
+ * Vue Peek, JavaScript(ES6) code snippets
+ * Vue 2 Snippets, vscode-element-helper
+ * change-case, Debugger for Chrome, Project Manager
+ * GitLens, Setting Sync, Path Intellisense, koroFileHeader
+ * *******************************************************
+ */
+ {
+  // 代码格式化设置
+  "editor.tabSize": 2,
+  "editor.autoIndent": "brackets",
+  "editor.formatOnSave": false, // 每次保存自动格式化
+  // 每次保存的时候将代码按eslint格式进行修复
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  // 保存文件时在文件末尾插入一个最终新行
+  "files.insertFinalNewline": true,
+  // 保存文件时将删除在最终新行后的所有新行
+  "files.trimFinalNewlines": true,
+  "beautify.options": {
+    "indent_size": 2
+  }
+}
