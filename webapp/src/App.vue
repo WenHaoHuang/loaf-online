@@ -1,4 +1,2 @@
-
-<template>
-  <router-view class="wrapper-app" />
-</template>
+<template src="./components/index.html"></template>
+<script src="./components/index.ts"></script>

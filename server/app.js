@@ -7,7 +7,9 @@ const io = require('socket.io')(server, { cors: true });
 const port = 3000;
 const db = require('./config/db.js');
 
-io.on('connection', (socket) => {
+const chat = io.of('chat');
+
+chat.on('connection', (socket) => {
     // 注册中间件
     socket.use((packet, next) => {
         if (packet.includes('login') || socket.userId) return next();
@@ -37,9 +39,11 @@ io.on('connection', (socket) => {
         socket.emit('login', userInfo);
         // 将userId写入socket中
         socket.userId = userInfo.userId;
+        // 进入房间
+        socket.join('chat');
         // 广播用户上线
         // 广播更新用户信息
-        io.emit('userChange', { userId: userInfo.userId, online: 1 });
+        chat.emit('userChange', { userId: userInfo.userId, online: 1 });
     });
     // 获取用户列表
     socket.on('userList', async () => {
@@ -73,7 +77,7 @@ io.on('connection', (socket) => {
         const updateSql = `UPDATE users SET online = 0 WHERE userId = ${userId}`
         await db.dbQuery(updateSql);
         // 广播更新用户信息
-        io.emit('userChange', { userId, online: 0 });
+        chat.emit('userChange', { userId, online: 0 });
     })
     // 发送消息
     socket.on('sendMsg', async ({ msg }) => {
@@ -83,7 +87,7 @@ io.on('connection', (socket) => {
         const rows = await db.dbQuery(sql);
         if (rows.affectedRows === 1) {
             // 广播新消息
-            io.emit('sendMsg', { id: rows.insertId, userId, msg, createTime: now });
+            chat.emit('sendMsg', { id: rows.insertId, userId, msg, createTime: now });
         } else {
             // 消息发送失败
             socket.emit('sendMsg', { code: 1, msg })
@@ -93,12 +97,14 @@ io.on('connection', (socket) => {
     socket.on('disconnect', async (reason) => {
         const { userId } = socket;
         if (!userId) { return }
+        // 离开chat房间
+        socket.leave('chat');
         // socket.close();
         // 更新用户在线状态
         const updateSql = `UPDATE users SET online = 0 WHERE userId = ${userId}`
         await db.dbQuery(updateSql);
         // 广播更新用户信息
-        io.emit('userChange', { userId, online: 0 });
+        chat.emit('userChange', { userId, online: 0 });
     });
     // 修改用户信息
     socket.on('edit', async ({ userName, oldPwd, newPwd }) => {
@@ -118,7 +124,7 @@ io.on('connection', (socket) => {
                 socket.emit('logout')
             }
             // 广播更新用户信息
-            io.emit('userChange', { userId, userName });
+            chat.emit('userChange', { userId, userName });
         }
     });
 });

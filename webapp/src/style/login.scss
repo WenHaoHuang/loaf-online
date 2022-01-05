@@ -6,24 +6,34 @@ $login-width: 260px;
   flex-direction: column;
   gap: 20px;
 }
-
-.login {
+.wrapper-login {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
+  overflow: hidden;
+  background-color: #fff;
+}
+.login {
   &--header {
     height: 180px;
-    background: transparent url('../assets/logo_login.png') scroll center center no-repeat;
+    background: transparent url('../assets/logo_login.png') scroll center center
+      no-repeat;
     background-size: 100% 100%;
   }
 
   &--copyright {
     text-align: center;
   }
-
-  .el-button,
-  .el-select {
-    width: 100%;
+  @at-root .box-login {
+    .el-button,
+    .el-select {
+      width: 100%;
+    }
   }
 }

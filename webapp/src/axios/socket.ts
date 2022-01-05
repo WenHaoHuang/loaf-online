@@ -1,18 +1,8 @@
-import { io } from 'socket.io-client'
-
-import type { App } from 'vue'
+import { Manager } from 'socket.io-client'
 
 const serverAddress = 'http://localhost:3000'
 
-export const websock = io(serverAddress, {
+export const websock = new Manager(serverAddress, {
   forceNew: true,
   reconnection: false,
 });
-
-const SOCKET = {
-  install: (app: App) => {
-    app.config.globalProperties.$websock = websock
-  }
-}
-
-export default SOCKET

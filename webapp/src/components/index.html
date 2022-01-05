@@ -1,0 +1,79 @@
+<article class="wrapper-app">
+  <article class="page-app">
+    <aside class="app-aside">
+      <div class="app-aside--avatar" @click="editUser">
+        <img src="/src/assets/zcool.jpg" />
+      </div>
+      <div class="app-aside--name">{{ userInfo.userName }}</div>
+    </aside>
+    <section class="app-group-list">
+      <div class="app-group-list--item is-active">
+        <span class="app-group-list--icon">
+          <img src="/src/assets/huanggua.webp" />
+        </span>
+        <div class="app-group-list--content">
+          <div class="app-group-list--header">
+            <span class="app-group-list--title">FN收容所</span>
+            <span class="app-group-list--time">2022-01-01</span>
+          </div>
+          <div class="app-group-list--desc">
+            {{ lastMsg.userName }}: {{ lastMsg.msg }}
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="app-main">
+      <section class="app-main--chat" v-scroll>
+        <div
+          class="app-main--chat-item"
+          :class="{ 'is-ower': chat.userId === userInfo.userId }"
+          v-for="chat in msgList"
+          :key="chat.id"
+        >
+          <div class="app-main--chat-title">
+            {{ chat.userName }} {{ chat.createTime }}
+          </div>
+          <div class="app-main--chat-content">{{ chat.msg }}</div>
+        </div>
+      </section>
+      <section class="app-main--chat-input">
+        <el-input type="textarea" v-model="chatMsg" @keyup.enter="sendMsg" />
+      </section>
+    </section>
+    <section class="app-member">
+      <div class="app-member--title">群成员[{{ userList.length }}]</div>
+      <div class="app-member--item" v-for="user in userList" :key="user.userId">
+        {{ user.userName }}{{ user.online === 0 ? ' - 离线' : '' }}
+      </div>
+    </section>
+    <teleport to="body">
+      <transition name="dialog-fade">
+        <div class="dialog-overlay" v-show="visibleDialog">
+          <div class="dialog-main">
+            <div class="form-item">
+              <el-input v-model="editInfo.userId" disabled />
+            </div>
+            <div class="form-item">
+              <el-input v-model="editInfo.userName" placeholder="请输入昵称" />
+            </div>
+            <div class="form-item">
+              <el-input v-model="editInfo.oldPwd" placeholder="请输入原密码" />
+            </div>
+            <div class="form-item">
+              <el-input v-model="editInfo.newPwd" placeholder="请输入新密码" />
+            </div>
+            <div class="form-item">
+              <el-button type="primary" @click="submit">确认</el-button>
+              <el-button @click="cancel">取消</el-button>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </teleport>
+  </article>
+  <teleport to="body">
+    <transition name="dialog-fade">
+      <dialog-login v-if="isLogout" @submit="login" />
+    </transition>
+  </teleport>
+</article>
