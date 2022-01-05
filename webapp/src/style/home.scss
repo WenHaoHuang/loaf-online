@@ -150,9 +150,10 @@
 
     &--item {
       padding: 0 10px;
-      height: 24px;
-      display: flex;
-      align-items: center;
+      line-height: 24px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
 }

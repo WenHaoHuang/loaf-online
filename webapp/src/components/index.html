@@ -43,7 +43,7 @@
     <section class="app-member">
       <div class="app-member--title">群成员[{{ userList.length }}]</div>
       <div class="app-member--item" v-for="user in userList" :key="user.userId">
-        {{ user.userName }}{{ user.online === 0 ? ' - 离线' : '' }}
+        {{ user.online === 0 ? '[离线]' : '' }}{{ user.userName }}
       </div>
     </section>
     <teleport to="body">

@@ -45,7 +45,7 @@ export default defineComponent({
   setup(props, context) {
 
     const loading = ref(false)
-    const formData = reactive({ userName: '18073766', userPwd: '123456' })
+    const formData = reactive({ userName: '', userPwd: '' })
     const rules = reactive({
       userName: [{ required: true, message: '账号必须填写' }],
       userPwd: [{ required: true, message: '密码必须填写' }]
